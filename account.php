@@ -25,7 +25,12 @@ $isLoggedIn = isset($_SESSION['user']);
 
                 <!-- Menu Box -->
                 <div id="menuBox" class="position-absolute top-100 end-0 bg-light border rounded p-3 shadow" style="display: none; min-width: 150px;">
-                    <a href="account.php" class="btn btn-light w-100 mb-2">Account</a>
+                    <?php if (!$isLoggedIn): ?>
+                        <a href="login.html" class="btn btn-primary w-100 mb-2">Login</a>
+                    <?php else: ?>
+                        <a href="logout.php" class="btn btn-secondary w-100 mb-2">Logout</a>
+                    <?php endif; ?>
+                    <a href="index.php" class="btn btn-light w-100 mb-2">Main Page</a>
                 </div>
             </div>
         </div>
@@ -33,7 +38,7 @@ $isLoggedIn = isset($_SESSION['user']);
 
     <!-- Main Content -->
     <div class="container mt-5">
-        <h1>Welcome to the Homepage</h1>
+        <h1>Account Details</h1>
         <p>Some content here...</p>
     </div>
 
