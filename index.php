@@ -15,6 +15,11 @@ $isLoggedIn = isset($_SESSION['user']);
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <h1>Skibidi ohio rizz
+
+
+        
+        </h1>
         <div class="container-fluid">
             <a class="navbar-brand" href="#">FinanceTrack</a>
             <div class="d-flex ms-auto">
