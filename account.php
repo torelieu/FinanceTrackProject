@@ -39,7 +39,6 @@ $isLoggedIn = isset($_SESSION['user']);
     <!-- Main Content -->
     <div class="container mt-5">
         <h1>Account Details</h1>
-        <p>Some content here...</p>
     </div>
 
     <script src="main.js"></script>
