@@ -3,6 +3,7 @@ session_start();
 
 // Check if the user is logged in by checking if a session variable is set
 $isLoggedIn = isset($_SESSION['user']);
+$userId = $_SESSION['user_id'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +40,24 @@ $isLoggedIn = isset($_SESSION['user']);
     <!-- Main Content -->
     <div class="container mt-5">
         <h1>Account Details</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h2>Set Your Budget</h2>
+
+        <!-- Budget Form -->
+        <form action="save_budgets.php" method="POST" class="mt-4">
+            <div class="mb-3">
+                <label for="monthYear" class="form-label">Month & Year</label>
+                <input type="month" name="month_year" id="monthYear" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label">Budget Amount</label>
+                <input type="number" name="amount" id="amount" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Budget</button>
+        </form>
     </div>
 
     <script src="main.js"></script>

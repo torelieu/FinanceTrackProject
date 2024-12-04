@@ -22,11 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         // Verify the password
         if (password_verify($password, $user['password'])) {
-            // Start a session and store user info if needed
+            // Start a session and store user info
             session_start();
             $_SESSION['user'] = $user['first_name'];
+            $_SESSION['user_id'] = $user['id']; // Store user ID
 
-            // Redirect to index.html after successful login
+            // Redirect to index.php after successful login
             header("Location: index.php");
             exit();
         } else {
