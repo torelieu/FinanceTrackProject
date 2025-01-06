@@ -1,6 +1,5 @@
 <?php
 require_once 'vendor/autoload.php'; // Načtení Google API knihovny
-
 session_start();
 
 // Nastavení Google API Client

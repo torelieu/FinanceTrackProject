@@ -1,5 +1,4 @@
 <?php
-session_start();
 // public/login.php
 include 'db.php';
 include 'header.php';
