@@ -18,9 +18,10 @@ if (isset($_GET['code'])) {
     $user_info = $google_service->userinfo->get();
 
     // Uložení dat uživatele do session
-    $_SESSION['user_id'] = $user_info->id;
+    $_SESSION['google_user'] = $user_info->id;
     $_SESSION['user_email'] = $user_info->email;
     $_SESSION['user_name'] = $user_info->name;
+    $_SESSION['user_picture'] = $google_account_info->picture;
 
     // Přesměrování na hlavní stránku
     header('Location: indexmain.php');

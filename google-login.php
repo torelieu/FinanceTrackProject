@@ -15,4 +15,4 @@ $login_url = $client->createAuthUrl();
 ?>
 
 <!-- HTML pro přihlášení -->
-<a href="<?php echo $login_url; ?>">Přihlásit se přes Google</a>
+<a href="<?php echo $login_url; ?>">Click here to login with google</a>

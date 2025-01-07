@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="password" class="form-control" id="password" name="password" required>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
-    <a class="nav-link" href="google-login.php">Login with Google</a>
+    <a class="btn btn-secondary" href="google-login.php">Login with Google</a>
 </form>
 
 <?php

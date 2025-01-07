@@ -19,12 +19,12 @@ session_start();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <?php if (isset($_SESSION['user_id'])): ?>
+                <?php if (isset($_SESSION['user_id']) || isset($_SESSION['google_user'])): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="accountpage.php">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="logoutmain.php">Logout</a>
+                        <a class="btn btn-danger" href="logoutmain.php">Logout</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
