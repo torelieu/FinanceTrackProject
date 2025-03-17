@@ -1,7 +1,7 @@
 <?php
 // public/register.php
 include 'db.php';
-include 'header.php';
+include 'head.html';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -18,22 +18,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2>Register</h2>
-<form method="POST" action="">
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+<br>
+<br>
+<br>
+<br>
+<div style="width: 35%; margin:auto; text-align:center;" class="mt-6 container p-5 my-5 bg-light rounded-4 shadow-lg">
+    <h2>REGISTER</h2>
+    <br>
+    <div class="row justify-content-center">
+        <form style="width:80%;" method="POST" action="">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div style="width:40%; margin:auto;" class="buttons">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a class="btn btn-outline-secondary btn-sm" href="loginpage.php">Login Page</a>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+</div>
+
+
+
 
 <?php
 include 'footer.php';

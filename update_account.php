@@ -5,17 +5,15 @@ require_once 'db.php';
 // Zkontrolujeme, zda je formulář odeslán
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
 
-    if (empty($name) || empty($email)) {
+    if (empty($name)) {
         echo "Name and email are required.";
         exit();
     }
 
     // Aktualizace údajů v databázi
-    $stmt = $pdo->prepare("UPDATE users SET username = :name, email = :email WHERE id = :id");
+    $stmt = $pdo->prepare("UPDATE users SET username = :name WHERE id = :id");
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
 
     if ($stmt->execute()) {

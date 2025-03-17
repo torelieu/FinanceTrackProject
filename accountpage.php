@@ -1,49 +1,74 @@
 <?php
-// public/account.php
-
 include 'header.php';
 include 'db.php';
 
-$is_google_user = isset($_SESSION['google_user']) === true;
-
-if ($is_google_user) {
-    echo "<h2>Welcome, " . htmlspecialchars($_SESSION['user_name']) . "!</h2>";
-    echo "<p>Email: " . htmlspecialchars($_SESSION['user_email']) . "</p>";
-    echo "<p>We cant provide more info, because you are not logged in within our database.</p>";
+if (!isset($_SESSION['user_id'])) {
+    header('Location: hostpage.php');
+    if (!isset($_SESSION['google_login'])) {
+        $isGoogleLogin = false;
+    } else {
+        $isGoogleLogin = true;
+    }
     exit();
 }
-else{
+ 
     $stmt = $pdo->prepare("SELECT username, email, created_at FROM users WHERE id = :id");
     $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-    
 ?>
 
 <div class="container mt-5">
-    <h1>Account Details</h1>
-
-    <?php if(!$is_google_user): ?>
-        <!-- Informace pro uživatele přihlášeného přes vlastní systém -->
-        <p><strong>Name:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-        <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-        <p><strong>Account Created:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
-
-        <!-- Formulář pro úpravu údajů -->
-        <h2>Edit Account Details</h2>
-        <form action="update_account.php" method="POST">
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" id="name" name="name" class="form-control" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+<h1 class="text-center mb-4">Account Details</h1>
+<div style="width: 60%;" class="container mt-5">
+    <div class="card p-4 border border-1 border-dark rounded-4 ">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-3"><strong>Name:</strong></p>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" name="email" class="form-control" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+            <div class="col-md-6 text-end">
+                <p class="mb-3"><?php echo htmlspecialchars($user['username']); ?></p>
             </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
-    <?php endif; ?>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-3"><strong>Email:</strong></p>
+            </div>
+            <div class="col-md-6 text-end">
+                <p class="mb-3"><?php echo htmlspecialchars($user['email']); ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-3"><strong>Account Created:</strong></p>
+            </div>
+            <div class="col-md-6 text-end">
+                <p class="mb-3"><?php echo htmlspecialchars($user['created_at']); ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+        <?php if (!isset($_SESSION['isGoogle'])) { ?>
+        <br>
+        <div style="width:35%; margin:auto; text-align:center; border-radius:5%;" class="container border border-1 border-danger p-5 my-5 bg-light">
+            <div class="row justify-content-center">
+                <h2>Edit Account Details</h2>
+                    <form action="update_account.php" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+            </div>
+        </div>
+        <?php }?>
+        
 </div>
 
 <?php

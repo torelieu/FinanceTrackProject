@@ -1,5 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
+include('db.php');
 session_start();
 
 // Nastavení Google API Client
@@ -17,13 +18,32 @@ if (isset($_GET['code'])) {
     $google_service = new Google_Service_Oauth2($client);
     $user_info = $google_service->userinfo->get();
 
-    // Uložení dat uživatele do session
-    $_SESSION['google_user'] = $user_info->id;
-    $_SESSION['user_email'] = $user_info->email;
-    $_SESSION['user_name'] = $user_info->name;
-    $_SESSION['user_picture'] = $google_account_info->picture;
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
+    $stmt->execute(['id' => $user_info->id]);
+    $user = $stmt->fetch();
 
-    // Přesměrování na hlavní stránku
+    if (!$user) {
+        // Generování náhodného hesla
+        $randomPassword = bin2hex(random_bytes(8)); // 16 znaků dlouhé heslo
+        $hashedPassword = password_hash($randomPassword, PASSWORD_DEFAULT);
+
+        $stmt = $pdo->prepare('INSERT INTO users (id, email, username, password_hash) VALUES (:id, :email, :username, :password_hash)');
+        $stmt->execute([
+            'id' => $user_info->id,
+            'email' => $user_info->email,
+            'username' => $user_info->name,
+            'password_hash' => $hashedPassword
+        ]);
+        
+        // Opětovné načtení uživatele z databáze
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
+        $stmt->execute(['id' => $user_info->id]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Uložení do session a přesměrování
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['isGoogle'] = true;
     header('Location: indexmain.php');
     exit();
 } else {

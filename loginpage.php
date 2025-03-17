@@ -1,7 +1,7 @@
 <?php
 // public/login.php
 include 'db.php';
-include 'header.php';
+include 'head.html';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -21,19 +21,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2>Login</h2>
-<form method="POST" action="">
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+<br>
+<br>
+<br>
+<br>
+<div style="width:35%; margin:auto; text-align:center;" class="container p-5 my-5 bg-light border border-3 rounded-4">
+    <h2>LOGIN</h2>
+    <br>
+    <div class="row justify-content-center">
+        <form style="width:80%;" method="POST" action="">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            
+            <div style="width:40%; margin:auto;" class="buttons">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a class="btn btn-outline-secondary btn-sm" href="registerpage.php">Register First</a>
+                    <a href="google-login.php">
+                        <img style="width:30%;" src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="GoogleLogin">
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" href="hostpage.php">Go Back</a>
+                </div>
+            </div>
+            
+         </form>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-    <a class="btn btn-secondary" href="google-login.php">Login with Google</a>
-</form>
+</div>
+
 
 <?php
 include 'footer.php';

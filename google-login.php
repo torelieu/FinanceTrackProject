@@ -12,7 +12,5 @@ $client->addScope('profile');
 
 // Vytvoříme URL pro přihlášení
 $login_url = $client->createAuthUrl();
+header('Location: ' . filter_var($login_url, FILTER_SANITIZE_URL));
 ?>
-
-<!-- HTML pro přihlášení -->
-<a href="<?php echo $login_url; ?>">Click here to login with google</a>
