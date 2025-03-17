@@ -68,7 +68,9 @@ $budgets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                         </div>
+                        <td class="delete-checkbox-cell d-none">
                         <input type="checkbox" class="delete-checkbox d-none" name="budget_ids[]" value="<?= $budget['id'] ?>">
+                        </td>
                     </div>
                 <?php endforeach; ?>
                 <div style="width:30%; margin:auto;" class="row justify-content-center">

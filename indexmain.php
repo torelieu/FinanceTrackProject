@@ -34,50 +34,58 @@ if (isset($_SESSION['message'])) {
 
         <br>
         
-        <!-- Display the last transactions -->
+<!-- Display the last transactions -->
 <div style="width: 55%; margin:auto;" class="mt-5">
     <div class="card rounded-4">
         <div class="card-header text-center">
             <h3 class="m-0">Latest Transactions</h3>
         </div>
         <div class="card-body p-4">
-            <table class="table table-hover">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col"><i class="fas fa-calendar-alt"></i> Date</th>
-                        <th scope="col"><i class="fas fa-tags"></i> Category</th>
-                        <th scope="col"><i class="fas fa-coins"></i> Amount</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionTableBody">
-                    <?php
-                    // Fetch the last 10 transactions for the current user
-                    $stmt = $pdo->prepare("
-                        SELECT t.transaction_date, c.name AS category_name, t.amount 
-                        FROM transactions t
-                        LEFT JOIN categories c ON t.category_id = c.id
-                        WHERE t.user_id = :user_id
-                        ORDER BY t.created_at DESC
-                        LIMIT 10
-                    ");
-                    $stmt->execute(['user_id' => $_SESSION['user_id']]);
-                    ?>
+            <button id="toggleDeleteMode" class="btn btn-danger mb-3">Delete</button>
 
-                    <?php
-                    // Fetch rows and categorize them for default
-                    $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    for ($i = 0; $i < count($transactions); $i++) {
-                        $row = $transactions[$i];
-                        $hiddenClass = ($i >= 1) ? 'd-none' : '';
-                        echo "<tr class='$hiddenClass'>
-                                <td>{$row['transaction_date']}</td>
-                                <td>" . ($row['category_name'] ?? '<span class=\"text-muted\">income</span>') . "</td>
-                                <td>" . number_format($row['amount'], 2) . " Czk</td>
-                            </tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+            <form id="deleteForm" action="delete_transactions.php" method="POST" onsubmit="return confirmTransactionDeletion();">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col"><i class="fas fa-calendar-alt"></i> Date</th>
+                            <th scope="col"><i class="fas fa-tags"></i> Category</th>
+                            <th scope="col"><i class="fas fa-coins"></i> Amount</th>
+                            <th scope="col" class="delete-checkbox-header d-none"><i class="fas fa-trash"></i> Select</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTableBody">
+                        <?php
+                        // Fetch the last 10 transactions for the current user
+                        $stmt = $pdo->prepare("
+                            SELECT t.id, t.transaction_date, c.name AS category_name, t.amount 
+                            FROM transactions t
+                            LEFT JOIN categories c ON t.category_id = c.id
+                            WHERE t.user_id = :user_id
+                            ORDER BY t.created_at DESC
+                            LIMIT 10
+                        ");
+                        $stmt->execute(['user_id' => $_SESSION['user_id']]);
+                        $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($transactions as $i => $row): 
+                            $hiddenClass = ($i >= 3) ? 'd-none' : ''; 
+                        ?>
+                            <tr class="<?= $hiddenClass ?>">
+                                <td><?= htmlspecialchars($row['transaction_date']) ?></td>
+                                <td><?= $row['category_name'] ?? '<span class="text-muted">Income</span>' ?></td>
+                                <td><?= number_format($row['amount'], 2) ?> Czk</td>
+                                <td class="delete-checkbox-cell d-none">
+                                    <input type="checkbox" class="delete-checkbox" name="transaction_ids[]" value="<?= $row['id'] ?>">
+                                </td>
+                                
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <!-- Delete Confirmation Button -->
+                <button type="submit" id="confirmDelete" class="btn btn-danger d-none mt-3">Confirm Delete</button>
+            </form>
 
             <!-- Show More / Show Less Button -->
             <div class="text-center mt-3">
@@ -90,24 +98,43 @@ if (isset($_SESSION['message'])) {
 <!-- Add Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<!-- Add JavaScript to Handle Show More/Show Less -->
+<!-- JavaScript for Show More and Delete Mode -->
 <script>
+document.addEventListener("DOMContentLoaded", function () {
     const showMoreBtn = document.getElementById('showMoreBtn');
     const transactionRows = document.querySelectorAll('#transactionTableBody tr.d-none');
     let showingAll = false;
 
     showMoreBtn.addEventListener('click', () => {
-        if (!showingAll) {
-            // Show hidden rows
-            transactionRows.forEach(row => row.classList.remove('d-none'));
-            showMoreBtn.textContent = 'Show Less';
-        } else {
-            // Hide rows after the first 5
-            transactionRows.forEach(row => row.classList.add('d-none'));
-            showMoreBtn.textContent = 'Show More';
-        }
+        transactionRows.forEach(row => row.classList.toggle('d-none'));
+        showMoreBtn.textContent = showingAll ? 'Show More' : 'Show Less';
         showingAll = !showingAll;
     });
+
+    // Delete Mode
+    const toggleDeleteBtn = document.getElementById("toggleDeleteMode");
+    const confirmDeleteBtn = document.getElementById("confirmDelete");
+    const deleteCheckboxes = document.querySelectorAll(".delete-checkbox");
+    const deleteCheckboxCells = document.querySelectorAll(".delete-checkbox-cell");
+    const deleteCheckboxHeaders = document.querySelectorAll(".delete-checkbox-header");
+
+    toggleDeleteBtn.addEventListener("click", function () {
+        const isDeleteMode = !confirmDeleteBtn.classList.contains("d-none");
+
+        deleteCheckboxHeaders.forEach(header => header.classList.toggle("d-none", isDeleteMode));
+        deleteCheckboxCells.forEach(cell => cell.classList.toggle("d-none", isDeleteMode));
+        confirmDeleteBtn.classList.toggle("d-none", isDeleteMode);
+    });
+});
+
+function confirmTransactionDeletion() {
+    const selectedCheckboxes = document.querySelectorAll(".delete-checkbox:checked");
+    if (selectedCheckboxes.length === 0) {
+        alert("Please select at least one transaction to delete.");
+        return false;
+    }
+    return confirm("Are you sure you want to delete the selected transactions?");
+}
 </script>
         
         

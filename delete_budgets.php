@@ -2,11 +2,6 @@
 session_start();
 require_once 'db.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: hostpage.php');
-    exit();
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_ids'])) {
     $budgetIds = $_POST['budget_ids'];
     
