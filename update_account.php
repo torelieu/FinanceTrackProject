@@ -2,27 +2,22 @@
 session_start();
 require_once 'db.php';
 
-// Zkontrolujeme, zda je formulář odeslán
+// Kontrola, zda je formulář odeslán
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
 
     if (empty($name)) {
-        echo "Name and email are required.";
+        echo "Name is required.";
         exit();
     }
 
-    // Aktualizace údajů v databázi
-    $stmt = $pdo->prepare("UPDATE users SET username = :name WHERE id = :id");
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+    // Volání metody pro aktualizaci uživatele
+    $db = Database::getInstance();
+    $message = $db->updateUser($_SESSION['user_id'], $name);
 
-    if ($stmt->execute()) {
-        echo "Údaje byly úspěšně aktualizovány!";
+    echo $message;
+    if ($message === "Údaje byly úspěšně aktualizovány!") {
         header('Location: accountpage.php');
-        exit();
-    } else {
-        echo "Došlo k chybě při aktualizaci údajů.";
         exit();
     }
 }
-?>

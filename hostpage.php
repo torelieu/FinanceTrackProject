@@ -1,64 +1,186 @@
 <?php
-include 'db.php';
 include 'head.html';
 ?>
+
 <style>
-
-    * {
-        overflow-y: hidden;
-    }
-
+    /* Nastavení celkové stránky */
     body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
         background: linear-gradient(to right, #2c3e50, #4ca1af);
         color: white;
+    }
+
+    /* Kontejner hlavní sekce */
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        font-weight: 300;
+        max-width: 700px;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-custom {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: #f39c12;
+        color: white;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #e67e22;
+        transform: scale(1.05);
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+
+    .btn-outline:hover {
+        background: white;
+        color: #2c3e50;
+        transform: scale(1.05);
+    }
+
+    /* Sekce funkcí */
+    .features-section {
+        background: white;
+        color: #2c3e50;
+        padding: 80px 20px;
         text-align: center;
     }
-    .container {
-        margin-top: 10%;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 30px;
+
+    .features-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .features-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .feature-card {
+        background: #f8f9fa;
+        padding: 25px;
         border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
     }
-    h1 {
-        font-weight: bold;
+
+    .feature-card:hover {
+        transform: translateY(-5px);
     }
-    .btn-custom {
-        background-color: #f39c12;
-        border: none;
-        padding: 10px 20px;
-        font-size: 18px;
-        color: white;
-        border-radius: 5px;
-        transition: 0.3s;
+
+    .feature-icon {
+        font-size: 40px;
+        color: #f39c12;
+        margin-bottom: 15px;
     }
-    .btn-custom:hover {
-        background-color: #e67e22;
+
+    /* Sekce Footer */
+    .footer {
+        background: #222;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+
+        .features-container {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 </style>
 
-<div class="container">
-        <h1>Welcome to FinanceTrack</h1>
-        <p class="lead">Your personal finance management tool</p>
-
-        <hr class="my-4">
-
-        <h3>What is FinanceTrack?</h3>
-        <p>FinanceTrack helps you track your income, expenses, and budgets in one place. Analyze your financial habits and plan your future.</p>
-
-        <h3>What can you do?</h3>
-        <ul class="list-unstyled">
-            <li>✔ Add and categorize transactions</li>
-            <li>✔ Set and monitor budgets</li>
-            <li>✔ View reports with interactive charts</li>
-            <li>✔ Secure login with email or Google</li>
-        </ul>
-
-        <h3>How to get started?</h3>
-        <p>Click below to log in or sign up and start managing your finances effortlessly.</p>
-
-        <a href="loginpage.php" class="btn btn-custom">Login / Register</a> 
+<!-- Hlavní úvodní sekce -->
+<section class="hero-section">
+    <h1>Take Control of Your Finances</h1>
+    <p>Track your income, expenses, and budgets effortlessly. Get real-time insights into your spending habits and achieve financial freedom with FinanceTrack.</p>
+    
+    <div class="cta-buttons">
+        <a href="registerpage.php" class="btn-custom btn-primary">Get Started</a>
+        <a href="loginpage.php" class="btn-custom btn-outline">Login</a>
     </div>
+</section>
 
+<!-- Sekce s funkcemi -->
+<section class="features-section">
+    <h2>Why Choose FinanceTrack?</h2>
+
+    <div class="features-container">
+        <div class="feature-card">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <h4>Real-Time Insights</h4>
+            <p>Monitor your financial health with interactive charts and reports.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fas fa-wallet feature-icon"></i>
+            <h4>Budget Planning</h4>
+            <p>Set and track budgets to manage your money more effectively.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fas fa-money-check-alt feature-icon"></i>
+            <h4>Expense Tracking</h4>
+            <p>Categorize and analyze your spending to stay on top of your finances.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fas fa-lock feature-icon"></i>
+            <h4>Secure & Private</h4>
+            <p>Your financial data is encrypted and securely stored.</p>
+        </div>
+    </div>
+</section>
 
 <?php
 include 'footer.php';

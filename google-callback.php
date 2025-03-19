@@ -18,27 +18,22 @@ if (isset($_GET['code'])) {
     $google_service = new Google_Service_Oauth2($client);
     $user_info = $google_service->userinfo->get();
 
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
-    $stmt->execute(['id' => $user_info->id]);
-    $user = $stmt->fetch();
+    // Získání instance DB
+    $db = Database::getInstance();
+
+    // Hledání uživatele podle e-mailu
+    $user = $db->findUserByEmail($user_info->email);
 
     if (!$user) {
         // Generování náhodného hesla
         $randomPassword = bin2hex(random_bytes(8)); // 16 znaků dlouhé heslo
         $hashedPassword = password_hash($randomPassword, PASSWORD_DEFAULT);
 
-        $stmt = $pdo->prepare('INSERT INTO users (id, email, username, password_hash) VALUES (:id, :email, :username, :password_hash)');
-        $stmt->execute([
-            'id' => $user_info->id,
-            'email' => $user_info->email,
-            'username' => $user_info->name,
-            'password_hash' => $hashedPassword
-        ]);
-        
-        // Opětovné načtení uživatele z databáze
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
-        $stmt->execute(['id' => $user_info->id]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Vložení nového uživatele BEZ ID (ID se vygeneruje automaticky)
+        $db->insertGoogleUser($user_info->email, $user_info->name, $hashedPassword);
+
+        // Získání nově vloženého uživatele
+        $user = $db->findUserByEmail($user_info->email);
     }
 
     // Uložení do session a přesměrování
@@ -49,3 +44,4 @@ if (isset($_GET['code'])) {
 } else {
     echo "Přihlášení přes Google selhalo!";
 }
+?>

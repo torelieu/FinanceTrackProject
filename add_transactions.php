@@ -8,50 +8,33 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['user_id'];
+    $userId = $_SESSION['user_id'];
     $amount = $_POST['amount'];
-    $transaction_date = $_POST['transaction_date'];
-    $category_id = !empty($_POST['category_id']) ? $_POST['category_id'] : null;
+    $transactionDate = $_POST['transaction_date'];
+    $transactionType = $_POST['transaction_type'];
+    
+    $db = Database::getInstance();
 
-    // Prevent positive amounts when a category is selected (Outcome validation)
-    if ($category_id && $amount > 0) {
-        $_SESSION['message'] = "Error: You cannot set a positive amount for an outcome transaction!";
-        header('Location: indexmain.php');
-        exit();
+    if ($transactionType === "income") {
+        // Uložit jako příjem s kategorií "Income"
+        $categoryId = null;
+        $amount = abs($amount); // Ujistit se, že je kladné
+        $_SESSION['message'] = $db->addTransaction($userId, $amount, $transactionDate, $categoryId, "Income");
+    } else {
+        // Uložit jako výdaj (záporné číslo)
+        $categoryId = $_POST['category_id'] ?? null;
+
+        if (!$categoryId) {
+            $_SESSION['message'] = "Error: You must select a category for expenses!";
+            header('Location: indexmain.php');
+            exit();
+        }
+
+        $amount = -abs($amount); // Uložit jako zápornou hodnotu
+        $_SESSION['message'] = $db->addTransaction($userId, $amount, $transactionDate, $categoryId);
     }
 
-    try {
-        // Database operations
-        $pdo->beginTransaction();
-        
-        $stmt = $pdo->prepare("
-            INSERT INTO transactions (user_id, amount, transaction_date, category_id)
-            VALUES (:user_id, :amount, :transaction_date, :category_id)
-        ");
-        $stmt->execute([
-            ':user_id' => $user_id,
-            ':amount' => $amount,
-            ':transaction_date' => $transaction_date,
-            ':category_id' => $category_id
-        ]);
-
-        // Balance update
-        $stmt = $pdo->prepare("
-            UPDATE balances
-            SET balance = balance + :amount
-            WHERE user_id = :user_id
-        ");
-        $stmt->execute([
-            ':amount' => $amount,
-            ':user_id' => $user_id
-        ]);
-
-        $pdo->commit();
-        $_SESSION['message'] = "Transaction added successfully!";
-        header('Location: indexmain.php');
-    } catch (Exception $e) {
-        $pdo->rollBack();
-        $_SESSION['message'] = "Error: " . $e->getMessage();
-    }
+    header('Location: indexmain.php');
+    exit();
 }
 ?>
