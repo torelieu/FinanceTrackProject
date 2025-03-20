@@ -19,29 +19,45 @@ body {
 </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+      <div class="container-fluid">
         <a class="navbar-brand" href="indexmain.php">FinanceTrack</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        
+        <!-- DŮLEŽITÉ: Atributy aria-* a navbar-toggler pro správnou funkci -->
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="budgets.php">Show Budgets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="categories.php">Add Category</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="accountpage.php">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-danger" href="logoutmain.php">➜</a>
-                </li>
-            </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="budgets.php">Show Budgets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.php">Add Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="accountpage.php">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-danger" href="logoutmain.php">➜</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
+    
+    <div class="container mt-4">
+      <!-- Zbytek obsahu stránky -->
     </div>
-</nav>
 <div class="container mt-4">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
 <?php
 ?>
