@@ -1,0 +1,19 @@
+FROM php:8.2-cli
+
+# Instalace Composeru
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Nastaví pracovní adresář
+WORKDIR /app
+
+# Zkopíruj celý projekt do kontejneru
+COPY . .
+
+# Instalace PHP závislostí
+RUN composer install
+
+# Otevře port (Render používá 10000)
+EXPOSE 10000
+
+# Spustí PHP server
+CMD ["php", "-S", "0.0.0.0:10000", "indexmain.php"]
