@@ -146,8 +146,8 @@ include 'head.html';
     <p>Track your income, expenses, and budgets effortlessly. Get real-time insights into your spending habits and achieve financial freedom with FinanceTrack.</p>
     
     <div class="cta-buttons">
-        <a href="registerpage.php" class="btn-custom btn-primary">Get Started</a>
-        <a href="loginpage.php" class="btn-custom btn-outline">Login</a>
+        <a href="/registerpage.php" class="btn-custom btn-primary">Get Started</a>
+        <a href="/loginpage.php" class="btn-custom btn-outline">Login</a>
     </div>
 </section>
 

@@ -3,7 +3,7 @@ session_start();
 require_once 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: hostpage.php');
+    header('Location: /hostpage.php');
     exit();
 }
 
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$categoryId) {
             $_SESSION['message'] = "Error: You must select a category for expenses!";
-            header('Location: indexmain.php');
+            header('Location: /indexmain.php');
             exit();
         }
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message'] = $db->addTransaction($userId, $amount, $transactionDate, $categoryId);
     }
 
-    header('Location: indexmain.php');
+    header('Location: /indexmain.php');
     exit();
 }
 ?>

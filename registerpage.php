@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary btn-lg">Register</button>
-                <a class="btn btn-outline-secondary btn-sm" href="loginpage.php">Login Page</a>
+                <a class="btn btn-outline-secondary btn-sm" href="/loginpage.php">Login Page</a>
             </div>
         </form>
     </div>

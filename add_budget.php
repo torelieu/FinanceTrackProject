@@ -4,7 +4,7 @@ require_once 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: loginpage.php");
+        header("Location: /loginpage.php");
         exit();
     }
 
@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db = Database::getInstance();
     $_SESSION['message'] = $db->addBudget($userId, $categoryId, $month, $amount);
 
-    header("Location: indexmain.php");
+    header("Location: /indexmain.php");
     exit();
 }
-header("Location: indexmain.php");
+header("Location: /indexmain.php");
 exit();
 ?>

@@ -20,7 +20,7 @@ body {
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="indexmain.php">FinanceTrack</a>
+        <a class="navbar-brand" href="/indexmain.php">FinanceTrack</a>
         
         <!-- DŮLEŽITÉ: Atributy aria-* a navbar-toggler pro správnou funkci -->
         <button 
@@ -38,16 +38,16 @@ body {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="budgets.php">Show Budgets</a>
+              <a class="nav-link" href="/budgets.php">Show Budgets</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="categories.php">Add Category</a>
+              <a class="nav-link" href="/categories.php">Add Category</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="accountpage.php">Account</a>
+              <a class="nav-link" href="/accountpage.php">Account</a>
             </li>
             <li class="nav-item">
-              <a class="btn btn-danger" href="logoutmain.php">➜</a>
+              <a class="btn btn-danger" href="/logoutmain.php">➜</a>
             </li>
           </ul>
         </div>

@@ -27,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary btn-lg">Login</button>
-                <a class="btn btn-outline-secondary btn-sm" href="registerpage.php">Register First</a>
+                <a class="btn btn-outline-secondary btn-sm" href="/registerpage.php">Register First</a>
                 
                 <!-- Google Login Button -->
-                <a href="google-login.php">
+                <a href="/google-login.php">
                     <img class="google-login mx-auto" src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="GoogleLogin">
                 </a>
 
-                <a class="btn btn-outline-danger btn-sm" href="hostpage.php">Go Back</a>
+                <a class="btn btn-outline-danger btn-sm" href="/hostpage.php">Go Back</a>
             </div>
         </form>
     </div>

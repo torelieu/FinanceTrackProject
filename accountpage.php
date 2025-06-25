@@ -5,7 +5,7 @@ include 'db.php';
 
 // Přesměrování, pokud není uživatel přihlášen
 if (!isset($_SESSION['user_id'])) {
-    header('Location: hostpage.php');
+    header('Location: /hostpage.php');
     exit();
 }
 
@@ -59,7 +59,7 @@ if (!$user) {
         <div style="width:35%; margin:auto; text-align:center;" class="container border border-1 border- p-5 my-5 bg-light rounded-4">
             <div class="row justify-content-center">
                 <h2>Edit Account Details</h2>
-                <form action="update_account.php" method="POST">
+                <form action="/update_account.php" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" id="name" name="name" class="form-control" value="<?php echo htmlspecialchars($user['username']); ?>" required>

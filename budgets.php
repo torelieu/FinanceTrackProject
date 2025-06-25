@@ -4,7 +4,7 @@ include 'header.php';
 require_once 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: hostpage.php');
+    header('Location: /hostpage.php');
     exit();
 }
 
@@ -15,7 +15,7 @@ $budgets = $db->getUserBudgets($_SESSION['user_id']);
 <div style="width: 60%;" class="container mt-5">
     <h2 class="text-center">Your Budgets</h2>
 
-    <form id="deleteForm" action="delete_budgets.php" method="POST" onsubmit="return confirmDeletion();">
+    <form id="deleteForm" action="/delete_budgets.php" method="POST" onsubmit="return confirmDeletion();">
         <div class="list-group">
             <?php if (count($budgets) > 0): ?>
                 <?php foreach ($budgets as $budget): 

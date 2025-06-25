@@ -54,7 +54,7 @@ class Database {
             if ($user && password_verify($password, $user['password_hash'])) {
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
-                header('Location: indexmain.php');
+                header('Location: /indexmain.php');
                 exit();
             } else {
                 echo "<div class='alert alert-danger'>Invalid email or password.</div>";

@@ -5,7 +5,7 @@ require_once 'db.php';
 
 // Kontrola, zda je uživatel přihlášen
 if (!isset($_SESSION['user_id'])) {
-    header('Location: hostpage.php');
+    header('Location: /hostpage.php');
     exit();
 }
 ?>
@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
 <div class="container d-flex justify-content-center align-items-center mt-4">
     <div class="col-lg-5 col-md-7 col-sm-10 p-5 bg-light border border-2 rounded-4 shadow text-center">
         <h3 class="mb-3">ADD CATEGORY</h3>
-        <form action="add_category.php" method="POST">
+        <form action="/add_category.php" method="POST">
             <div class="mb-3">
                 <label for="category_name" class="form-label">Category Name</label>
                 <input type="text" class="form-control" id="category_name" name="category_name" required>

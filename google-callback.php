@@ -7,7 +7,7 @@ session_start();
 $client = new Google_Client();
 $client->setClientId('699961376156-vgbq2pahgb84jon13vr2rq7lbrd7ambp.apps.googleusercontent.com');
 $client->setClientSecret('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');
-$client->setRedirectUri('http://localhost/financetrack/google-callback.php');
+$client->setRedirectUri('/google-callback.php');
 
 // Získání ověřovacího kódu
 if (isset($_GET['code'])) {
@@ -39,7 +39,7 @@ if (isset($_GET['code'])) {
     // Uložení do session a přesměrování
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['isGoogle'] = true;
-    header('Location: indexmain.php');
+    header('Location: /indexmain.php');
     exit();
 } else {
     echo "Přihlášení přes Google selhalo!";

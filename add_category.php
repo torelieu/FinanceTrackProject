@@ -4,7 +4,7 @@ require_once 'db.php';
 
 // Kontrola přihlášení
 if (!isset($_SESSION['user_id'])) {
-    header('Location: loginpage.php');
+    header('Location: /loginpage.php');
     exit();
 }
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo $message;
     if ($message === "Category added successfully!") {
-        header('Location: indexmain.php');
+        header('Location: /indexmain.php');
         exit();
     }
 }

@@ -7,6 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_ids'])) {
     $_SESSION['message'] = $db->deleteBudgets($_SESSION['user_id'], $_POST['budget_ids']);
 }
 
-header('Location: budgets.php');
+header('Location: /budgets.php');
 exit();
 ?>

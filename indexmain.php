@@ -4,7 +4,7 @@ include 'header.php';
 require_once 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: hostpage.php');
+    header('Location: /hostpage.php');
     exit();
 }
 
@@ -110,7 +110,7 @@ foreach ($budgets as $budget) {
                 <i class="fas fa-filter me-1"></i> Filter
             </button>
             <div class="dropdown-menu dropdown-menu-end p-3 shadow-sm" style="min-width: 250px;">
-                <form id="filterForm" method="GET" action="indexmain.php">
+                <form id="filterForm" method="GET" action="/indexmain.php">
                     <div class="mb-2">
                         <label for="filterSelect" class="form-label small">Filter by:</label>
                         <select class="form-select form-select-sm" name="filter" id="filterSelect">
@@ -145,7 +145,7 @@ foreach ($budgets as $budget) {
 <!-- Tabulka transakcí -->
 <div class="card shadow-sm rounded-4">
     <div class="card-body p-4">
-        <form id="deleteForm" action="delete_transactions.php" method="POST" onsubmit="return confirmTransactionDeletion();">
+        <form id="deleteForm" action="/delete_transactions.php" method="POST" onsubmit="return confirmTransactionDeletion();">
             <table class="table table-hover mt-3">
                 <thead class="table-light">
                     <tr>
@@ -186,7 +186,7 @@ foreach ($budgets as $budget) {
     <div class="col-lg-5 col-md-6 mx-auto">
         <div class="card p-4 bg-light border rounded-4 shadow-sm">
             <h4 class="text-center">Add Income</h4>
-            <form action="add_transactions.php" method="POST">
+            <form action="/add_transactions.php" method="POST">
                 <input type="hidden" name="transaction_type" value="income">
                 <div class="mb-3">
                     <label for="income_amount" class="form-label">Amount</label>
@@ -205,7 +205,7 @@ foreach ($budgets as $budget) {
     <div class="col-lg-5 col-md-6 mx-auto">
         <div class="card p-4 bg-light border rounded-4 shadow-sm">
             <h4 class="text-center">Add Expense</h4>
-            <form action="add_transactions.php" method="POST">
+            <form action="/add_transactions.php" method="POST">
                 <input type="hidden" name="transaction_type" value="expense">
                 <div class="mb-3">
                     <label for="expense_amount" class="form-label">Amount</label>
@@ -243,7 +243,7 @@ foreach ($budgets as $budget) {
     <div class="col-lg-6 mx-auto">
         <div class="card p-4 bg-light border rounded-4 shadow-sm">
             <h4 class="text-center">Create Budget</h4>
-            <form action="add_budget.php" method="POST">
+            <form action="/add_budget.php" method="POST">
                 <div class="mb-3">
                     <label for="budget_category_id" class="form-label">Select Category</label>
                     <select class="form-select" id="budget_category_id" name="category_id" required>
