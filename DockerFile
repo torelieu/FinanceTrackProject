@@ -22,4 +22,4 @@ RUN composer install
 EXPOSE 10000
 
 # Startuj PHP server
-CMD ["php", "-S", "0.0.0.0:10000", "hostpage.php"]
+CMD ["php", "-S", "0.0.0.0:10000", "router.php"]
