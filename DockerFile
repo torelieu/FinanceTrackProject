@@ -1,19 +1,25 @@
 FROM php:8.2-cli
 
+# Instalace potřebných PHP rozšíření
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    unzip \
+    && docker-php-ext-install pdo pdo_pgsql
+
 # Instalace Composeru
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Nastaví pracovní adresář
 WORKDIR /app
 
-# Zkopíruj celý projekt do kontejneru
+# Zkopíruj celý projekt
 COPY . .
 
-# Instalace PHP závislostí
+# Nainstaluj PHP balíčky
 RUN composer install
 
-# Otevře port (Render používá 10000)
+# Otevři port
 EXPOSE 10000
 
-# Spustí PHP server
+# Startuj PHP server
 CMD ["php", "-S", "0.0.0.0:10000", "indexmain.php"]
