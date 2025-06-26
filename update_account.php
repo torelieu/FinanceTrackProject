@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = Database::getInstance();
     $message = $db->updateUser($_SESSION['user_id'], $name);
 
-    $_SESSION['message'] = "Category added successfully!";
+    $_SESSION['message'] = "Data updated succesfuly!";
     header('Location: /accountpage.php');
     exit();
 }

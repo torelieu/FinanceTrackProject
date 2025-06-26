@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = $db->addCategory($userId, $categoryName);
 
     $_SESSION['message'] = "Category added successfully!";
-    header('Location: /indexmain.php');
+    header('Location: /categories.php');
     exit();
 }
 ?>

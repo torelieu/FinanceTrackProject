@@ -12,6 +12,10 @@ if (!isset($_SESSION['user_id'])) {
 // Teď už můžeme načítat další věci (HTML, komponenty, DB, atd.)
 require_once 'db.php';
 
+if (isset($_SESSION['message'])) {
+    echo "<div class='alert alert-warning text-center'>{$_SESSION['message']}</div>";
+    unset($_SESSION['message']);
+}
 
 $isGoogleLogin = isset($_SESSION['isGoogle']) ? true : false;
 
