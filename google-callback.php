@@ -1,7 +1,12 @@
 <?php
+//Session musí být jako první
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+//Autoloader a DB až po session
 require_once 'vendor/autoload.php';
-include('db.php');
-session_start();
+require_once 'db.php';
 
 // Nastavení Google API Client
 $client = new Google_Client();

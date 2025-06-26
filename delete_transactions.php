@@ -1,11 +1,16 @@
 <?php
-session_start();
-require_once 'db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+// Ověříme, jestli je uživatel přihlášen
 if (!isset($_SESSION['user_id'])) {
     header('Location: /hostpage.php');
     exit();
 }
+
+// Teď už můžeme načítat další věci (HTML, komponenty, DB, atd.)
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['transaction_ids'])) {
     $userId = $_SESSION['user_id'];

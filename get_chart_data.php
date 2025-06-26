@@ -1,11 +1,15 @@
 <?php
-require_once 'db.php';
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['user_id'])) {
     echo json_encode([]);
     exit();
 }
+
+require_once 'db.php';
 
 $db = Database::getInstance();
 $userId = $_SESSION['user_id'];

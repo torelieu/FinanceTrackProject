@@ -46,7 +46,9 @@ class Database {
             $user = $stmt->fetch();
 
             if ($user && password_verify($password, $user['password_hash'])) {
+                if (session_status() === PHP_SESSION_NONE) {
                 session_start();
+                }   
                 $_SESSION['user_id'] = $user['id'];
                 header('Location: /indexmain.php');
                 exit();

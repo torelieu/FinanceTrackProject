@@ -1,7 +1,8 @@
 <?php
 // public/login.php
-include 'head.html';
 require_once 'db.php';
+include 'head.html';
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];

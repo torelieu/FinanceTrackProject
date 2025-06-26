@@ -1,13 +1,17 @@
 <?php
-session_start();
-include 'header.php';
-require_once 'db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Kontrola, zda je uživatel přihlášen
+// Ověříme, jestli je uživatel přihlášen
 if (!isset($_SESSION['user_id'])) {
     header('Location: /hostpage.php');
     exit();
 }
+
+// Teď už můžeme načítat další věci (HTML, komponenty, DB, atd.)
+require_once 'db.php';
+include 'header.php';
 ?>
 
 <h2 class="text-center mt-4">ADD CATEGORIES AND MANAGE BUDGETS</h2>

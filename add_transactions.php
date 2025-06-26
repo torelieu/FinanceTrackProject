@@ -1,11 +1,15 @@
 <?php
-session_start();
-require_once 'db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+// Kontrola přihlášení
 if (!isset($_SESSION['user_id'])) {
     header('Location: /hostpage.php');
     exit();
 }
+
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = $_SESSION['user_id'];
