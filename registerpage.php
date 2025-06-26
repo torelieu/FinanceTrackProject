@@ -1,7 +1,7 @@
 <?php
 // public/register.php
 include 'db.php';
-include 'head.html';
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = Database::getInstance();
     $db->registerUser($username, $email, $password);
 }
-    
+
+include 'head.html';
 ?>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">

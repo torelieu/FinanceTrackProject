@@ -11,10 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 
 // Teď už můžeme načítat další věci (HTML, komponenty, DB, atd.)
 require_once 'db.php';
-include 'header.php';
+
 
 $db = Database::getInstance();
 $budgets = $db->getUserBudgets($_SESSION['user_id']);
+
+include 'header.php';
 ?>
 
 <div style="width: 60%;" class="container mt-5">

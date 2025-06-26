@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 require_once 'db.php';
-include 'header.php';
+
 
 $db = Database::getInstance();
 $userId = $_SESSION['user_id'];
@@ -41,6 +41,8 @@ foreach ($budgets as $budget) {
         $exceededBudgets[] = $budget;
     }
 }
+
+include 'header.php';
 ?>
 
 <!-- Upozornění na překročený budget -->

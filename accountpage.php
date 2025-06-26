@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Teď už můžeme načítat další věci (HTML, komponenty, DB, atd.)
 require_once 'db.php';
-include 'header.php';
+
 
 $isGoogleLogin = isset($_SESSION['isGoogle']) ? true : false;
 
@@ -25,6 +25,8 @@ if (!$user) {
     echo "<div class='alert alert-danger'>User not found.</div>";
     exit();
 }
+
+include 'header.php';
 ?>
 
 <div class="container mt-5">

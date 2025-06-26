@@ -1,7 +1,7 @@
 <?php
 // public/login.php
 require_once 'db.php';
-include 'head.html';
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = Database::getInstance();
     $db->loginUser($email, $password);
 }
+
+include 'head.html';
 ?>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
