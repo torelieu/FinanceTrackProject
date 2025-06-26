@@ -20,10 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = Database::getInstance();
     $message = $db->addCategory($userId, $categoryName);
 
-    echo $message;
-    if ($message === "Category added successfully!") {
-        header('Location: /indexmain.php');
-        exit();
-    }
+    $_SESSION['message'] = "Category added successfully!";
+    header('Location: /indexmain.php');
+    exit();
 }
 ?>
