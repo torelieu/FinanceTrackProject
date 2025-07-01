@@ -12,7 +12,7 @@ require_once 'db.php';
 $client = new Google_Client();
 $client->setClientId('699961376156-vgbq2pahgb84jon13vr2rq7lbrd7ambp.apps.googleusercontent.com');
 $client->setClientSecret('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');
-$client->setRedirectUri('/google-callback.php');
+$client->setRedirectUri('https://finance-track-uxdj.onrender.com/google-callback.php');
 
 // Získání ověřovacího kódu
 if (isset($_GET['code'])) {
