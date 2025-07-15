@@ -365,7 +365,7 @@ const fetchAndDrawCharts = (month) => {
     fetch(`get_chart_data.php?month=${month}`)
         .then(response => response.json())
         .then(data => {
-            drawBalanceChart(data.balanceOverTime);
+            drawBalanceChart(data.balanceOverTime, month);
             drawCategoryChart(data.spendingByCategory);
             drawIncomeExpenseChart(data.incomeVsExpenses);
         })
@@ -373,7 +373,7 @@ const fetchAndDrawCharts = (month) => {
 };
 
 // 📊 Vývoj zůstatku (původní graf)
-const drawBalanceChart = (data) => {
+const drawBalanceChart = (data, month) => {
     const labels = data.map(item => item.day);
     const amounts = data.map(item => parseFloat(item.total));
 
