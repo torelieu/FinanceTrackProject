@@ -54,7 +54,7 @@ include 'header.php';
                     </div>
                 <?php endforeach; ?>
                 
-                <div margin:auto; class="row justify-content-center w-100">
+                <div class="d-flex justify-content-center w-100 my-3">
                     <button type="submit" class="btn btn-danger">Delete Selected</button>
                 </div>
 

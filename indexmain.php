@@ -206,9 +206,7 @@ include 'header.php';
             </form>
         </div>
     </div>
-</div>
 
-<div class="row mt-5">
     <!-- Formulář pro výdaj -->
     <div class="col-lg-5 col-md-6 mx-auto">
         <div class="card p-4 bg-light border rounded-4 shadow-sm">
