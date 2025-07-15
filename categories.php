@@ -20,7 +20,7 @@ if (isset($_SESSION['message'])) {
 include 'header.php';
 ?>
 
-<h2 class="text-center mt-4">ADD CATEGORIES AND MANAGE BUDGETS</h2>
+<h2 class="text-center mt-4">ADD CATEGORIES</h2>
 
 <div class="container d-flex justify-content-center align-items-center mt-4">
     <div class="col-lg-5 col-md-7 col-sm-10 p-5 bg-light border border-2 rounded-4 shadow text-center">
