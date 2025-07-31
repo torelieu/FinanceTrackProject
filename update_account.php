@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once 'db.php';
 
-// Kontrola, zda je formulář odeslán
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
 
@@ -13,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Volání metody pro aktualizaci uživatele
+    // Volá metody pro aktualizaci uživatele
     $db = Database::getInstance();
     $message = $db->updateUser($_SESSION['user_id'], $name);
 

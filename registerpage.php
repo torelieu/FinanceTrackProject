@@ -41,7 +41,6 @@ include 'head.html';
 </div>
 
 <style>
-    /* Mobilní přizpůsobení */
     @media (max-width: 768px) {
         .container {
             padding: 20px;

@@ -3,7 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Zkontroluj, jestli je uživatel přihlášen
 if (!isset($_SESSION['user_id'])) {
     header('Location: /hostpage.php');
     exit();
@@ -20,14 +19,11 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 }
 
-// Získání posledních transakcí
-//$transactions = $db->getLatestTransactions($userId);
-
 // Získání hodnot filtrů z GET parametrů (default: latest)
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'latest';
 $selectedCategory = isset($_GET['category']) ? $_GET['category'] : null;
 
-// Načteme filtrované transakce (limit 10)
+// Načte filtrované transakce (limit 10)
 $transactions = $db->getFilteredTransactions($userId, $filter, 10, $selectedCategory);
 
 // Získání kategorií pro select inputy
@@ -68,7 +64,7 @@ include 'header.php';
         <input type="month" id="monthInput" value="">
     </div>
 
-    <!-- Řádek pro grafy -->
+    
     <div class="row">
         <!-- Vývoj zůstatku -->
         <div class="col-lg-6 col-md-12 mb-4">
@@ -101,7 +97,6 @@ include 'header.php';
     <br>
     <br>
 
-    <!-- Nadpis sekce, tlačítko filtru a tlačítko smazání -->
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3 class="m-0">Latest Transactions</h3>
     <div class="d-flex gap-2">
@@ -175,7 +170,6 @@ include 'header.php';
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <!-- Confirm Delete Button -->
             <div class="text-center mt-3">
                 <button type="submit" id="confirmDelete" class="btn btn-outline-danger btn-sm d-none">Confirm Delete</button>
             </div>
@@ -276,7 +270,6 @@ include 'header.php';
 </div>
 </div>
 
-<!-- Add Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -296,7 +289,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- JavaScript for Show More and Delete Mode -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -360,7 +352,7 @@ let balanceChart = null;
 let categoryChart = null;
 let incomeExpenseChart = null;
 
-// 📌 Funkce pro načtení dat a vykreslení všech grafů
+// Funkce pro načtení dat a vykreslení všech grafů
 const fetchAndDrawCharts = (month) => {
     fetch(`get_chart_data.php?month=${month}`)
         .then(response => response.json())
@@ -372,12 +364,12 @@ const fetchAndDrawCharts = (month) => {
         .catch(error => console.error('Error fetching chart data:', error));
 };
 
-// 📊 Vývoj zůstatku (původní graf)
+// Vývoj zůstatku (původní graf)
 const drawBalanceChart = (data, month) => {
     const labels = data.map(item => item.day);
     const amounts = data.map(item => parseFloat(item.total));
 
-    // Vypočítáme kumulativní součet
+    // Vypočítá kumulativní součet
     const cumulativeAmounts = amounts.reduce((acc, value, index) => {
         acc.push((acc[index - 1] || 0) + value);
         return acc;
@@ -413,7 +405,7 @@ const drawBalanceChart = (data, month) => {
     });
 };
 
-// 📊 Výdaje podle kategorií (koláčový graf)
+// Výdaje podle kategorií
 const drawCategoryChart = (data) => {
     const labels = data.map(item => item.category_name);
     const amounts = data.map(item => parseFloat(item.total_spent));
@@ -437,7 +429,7 @@ const drawCategoryChart = (data) => {
     });
 };
 
-// 📊 Příjmy vs. Výdaje (sloupcový graf)
+// Příjmy vs. Výdaje (sloupcový graf)
 const drawIncomeExpenseChart = (data) => {
     const labels = ["Income", "Expenses"];
     const amounts = [parseFloat(data.total_income), parseFloat(data.total_expenses)];
@@ -461,13 +453,13 @@ const drawIncomeExpenseChart = (data) => {
     });
 };
 
-// 📌 Když se změní měsíc, znovu načíst data
+// Když se změní měsíc, znovu načíst data
 monthInput.addEventListener('change', () => {
     const selectedMonth = monthInput.value;
     fetchAndDrawCharts(selectedMonth);
 });
 
-// 📌 Načíst všechny grafy při startu
+// Načíst všechny grafy při startu
 document.addEventListener("DOMContentLoaded", function() {
     fetchAndDrawCharts(currentMonth);
 });

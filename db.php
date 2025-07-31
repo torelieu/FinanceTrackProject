@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php'; // Zajisti správné načtení Composeru
+require_once __DIR__ . '/vendor/autoload.php';
 
 class Database {
     private static $instance = null;
@@ -163,7 +163,7 @@ class Database {
         try {
             $this->pdo->beginTransaction();
     
-            // Pokud je příjem, nastavíme kategorii jako "Income"
+            // Pokud je příjem, nastaví kategorii jako "Income"
             if ($forceCategory === "Income") {
                 $stmt = $this->pdo->prepare("SELECT id FROM categories WHERE user_id = :user_id AND name = 'Income' LIMIT 1");
                 $stmt->execute([':user_id' => $userId]);
@@ -328,14 +328,12 @@ public function getFilteredTransactions($userId, $filter = 'latest', $limit = 10
     if ($filter === 'category' && !empty($category)) {
         $whereCategory = " AND t.category_id = :category";
         $params[':category'] = $category;
-        // V tomto případě řadíme defaultně podle vytvoření
         $order = "ORDER BY t.created_at DESC";
     } elseif ($filter === 'amount') {
         $order = "ORDER BY ABS(t.amount) DESC";
     } elseif ($filter === 'date') {
         $order = "ORDER BY t.transaction_date DESC";
     } else {
-        // Default: latest transactions
         $order = "ORDER BY t.created_at DESC";
     }
 

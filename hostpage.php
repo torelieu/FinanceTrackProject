@@ -140,10 +140,11 @@ include 'head.html';
     }
 </style>
 
-<!-- Hlavní úvodní sekce -->
 <section class="hero-section">
     <h1>Take Control of Your Finances</h1>
     <p>Track your income, expenses, and budgets effortlessly. Get real-time insights into your spending habits and achieve financial freedom with FinanceTrack.</p>
+
+    <h3>Click get started to register, if you already have an account, click login.</h3>
     
     <div class="cta-buttons">
         <a href="/registerpage.php" class="btn-custom btn-primary">Get Started</a>
@@ -151,7 +152,6 @@ include 'head.html';
     </div>
 </section>
 
-<!-- Sekce s funkcemi -->
 <section class="features-section">
     <h2>Why Choose FinanceTrack?</h2>
 

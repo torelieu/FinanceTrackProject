@@ -1,5 +1,4 @@
 <?php
-// public/login.php
 require_once 'db.php';
 
 
@@ -44,13 +43,13 @@ include 'head.html';
 </div>
 
 <style>
-    /* Google Login Image Styling */
+    
     .google-login {
         width: 40px;
         display: block;
     }
 
-    /* Mobile Adjustments */
+    
     @media (max-width: 768px) {
         .container {
             padding: 20px;

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($transactionType === "income") {
         // Uložit jako příjem s kategorií "Income"
         $categoryId = null;
-        $amount = abs($amount); // Ujistit se, že je kladné
+        $amount = abs($amount);
         $_SESSION['message'] = $db->addTransaction($userId, $amount, $transactionDate, $categoryId, "Income");
     } else {
         // Uložit jako výdaj (záporné číslo)

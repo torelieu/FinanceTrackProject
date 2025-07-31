@@ -1,10 +1,8 @@
 <?php
-//Session musí být jako první
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-//Autoloader a DB až po session
 require_once 'vendor/autoload.php';
 require_once 'db.php';
 
@@ -34,18 +32,16 @@ if (isset($_GET['code'])) {
     $user = $db->findUserByEmail($user_info->email);
 
     if (!$user) {
-        // Generování náhodného hesla
-        $randomPassword = bin2hex(random_bytes(8)); // 16 znaků dlouhé heslo
+        // Generování random hesla
+        $randomPassword = bin2hex(random_bytes(8));
         $hashedPassword = password_hash($randomPassword, PASSWORD_DEFAULT);
 
         // Vložení nového uživatele BEZ ID (ID se vygeneruje automaticky)
         $db->insertGoogleUser($user_info->email, $user_info->name, $hashedPassword);
 
-        // Získání nově vloženého uživatele
         $user = $db->findUserByEmail($user_info->email);
     }
 
-    // Uložení do session a přesměrování
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['isGoogle'] = true;
     header('Location: /indexmain.php');

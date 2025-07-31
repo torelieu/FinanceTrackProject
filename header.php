@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 <style>
 body {
-    background-color: #f4f4f9; /* Light neutral color */
-    background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/dotted-pattern.png'); /* Replace with your favorite pattern */
-    background-size: cover; /* Ensures the pattern scales nicely */
+    background-color: #f4f4f9;
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/dotted-pattern.png');
+    background-size: cover;
     margin: 0;
     font-family: 'Arial', sans-serif;
 }
@@ -22,7 +22,6 @@ body {
       <div class="container-fluid">
         <a class="navbar-brand" href="/indexmain.php">FinanceTrack</a>
         
-        <!-- DŮLEŽITÉ: Atributy aria-* a navbar-toggler pro správnou funkci -->
         <button 
           class="navbar-toggler" 
           type="button" 
@@ -55,7 +54,7 @@ body {
     </nav>
     
     <div class="container mt-4">
-      <!-- Zbytek obsahu stránky -->
+      
     </div>
 <div class="container mt-4">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
