@@ -144,7 +144,7 @@ include 'head.html';
     <h1>Take Control of Your Finances</h1>
     <p>Track your income, expenses, and budgets effortlessly. Get real-time insights into your spending habits and achieve financial freedom with FinanceTrack.</p>
 
-    <h3>Click get started to register, if you already have an account, click login.</h3>
+    <p>Click get started to register, if you already have an account, click login.</p>
     
     <div class="cta-buttons">
         <a href="/registerpage.php" class="btn-custom btn-primary">Get Started</a>
