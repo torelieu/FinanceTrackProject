@@ -416,6 +416,18 @@ const drawCategoryChart = (data) => {
         categoryChart.destroy();
     }
 
+    if (amounts.length === 0) {
+        // Vyčistí canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = '16px Arial';
+        ctx.fillStyle = 'gray';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('No data for this month', canvas.width / 2, canvas.height / 2);
+        return;
+    }
+
     categoryChart = new Chart(ctx, {
         type: 'pie',
         data: {
