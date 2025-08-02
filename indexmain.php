@@ -270,7 +270,7 @@ include 'header.php';
 </div>
 </div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -416,14 +416,15 @@ const drawCategoryChart = (data) => {
         categoryChart.destroy();
     }
 
-    if (amounts.length === 0) {
-        // Vyčistí canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Kontrola, jestli jsou všechna čísla 0 (nebo není nic)
+    const isEmpty = amounts.length === 0 || amounts.every(val => val === 0);
 
+    if (isEmpty) {
+        // Vyčistit plátno
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.font = '16px Arial';
         ctx.fillStyle = 'gray';
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
         ctx.fillText('No data for this month', canvas.width / 2, canvas.height / 2);
         return;
     }
