@@ -416,19 +416,6 @@ const drawCategoryChart = (data) => {
         categoryChart.destroy();
     }
 
-    // Kontrola, jestli jsou všechna čísla 0 (nebo není nic)
-    const isEmpty = amounts.length === 0 || amounts.every(val => val === 0);
-
-    if (isEmpty) {
-        // Vyčistit plátno
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.font = '16px Arial';
-        ctx.fillStyle = 'gray';
-        ctx.textAlign = 'center';
-        ctx.fillText('No data for this month', canvas.width / 2, canvas.height / 2);
-        return;
-    }
-
     categoryChart = new Chart(ctx, {
         type: 'pie',
         data: {
